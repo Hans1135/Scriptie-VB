@@ -13,8 +13,6 @@ Module UnitTabsFIle
 
         Function Init() As UIElement
 
-            ' start bestanden veld
-
             FileStack.Children.Add(FileText)
             FileStack.Children.Add(RootsLabel)
             FileStack.Children.Add(FileRoot.Init)
@@ -32,8 +30,6 @@ Module UnitTabsFIle
         End Function
 
         Sub Load(S As String)
-
-            ' laadt een bestand
 
             Select Case GetFileType(S)
                 Case ".txt", ".srt", ".dat", ".ldr", ".mtl", ".vb", ".bvh"
@@ -175,8 +171,6 @@ Module UnitTabsFIle
 
         Sub Update(S As String)
 
-            ' vult de bestandenlijst opnieuw
-
             Dim L As Short
 
             L = Len(FileRoot.SelectedItem) + 2 ' lengte van het geselecteerde bron pad
@@ -184,6 +178,7 @@ Module UnitTabsFIle
             For Each F In Directory.GetFiles(S) ' zoek bestanden in het pad
                 Me.Items.Add(Mid(F, L))
             Next
+
             If File.Exists(S & "\info.jpg") Then
                 MediaPict.Load(S & "\info.jpg")
             Else
@@ -303,46 +298,50 @@ verder:
     Sub FileMakeDirs()
 
         ' maakt een map
+
         ' W(0) = "makedirs"
         ' W(1) = mapnaam
 
-        'Dim P As String
+        Dim P As String
 
-        'If InStr(W(1), ":") = 0 Then
-        'P = FileRoots.SelectedItem & W(1)
-        'Else
-        'P = W(1)
-        'End If
+        If InStr(W(1), ":") = 0 Then ' als het pad geen schijf bevat
+            P = FileRoot.SelectedItem & W(1)
+        Else
+            P = W(1)
+        End If
 
-        'If Directory.Exists(P) = False Then
-        'Directory.CreateDirectory(P)
-        'Else
-        '' MsgBox(S & " bestaat al")
-        'End If
+        If Directory.Exists(P) = False Then
+            Directory.CreateDirectory(P)
+        Else
+            ' MsgBox(S & " bestaat al")
+        End If
     End Sub
 
     Sub FileMakeFile()
 
         ' maakt een bestand
+
         ' W(0) = "makefile"
-        ' W(1) = filenaam
+        ' W(1) = bestandadres
 
-        'Dim P As String
-        'Dim S As String
+        Dim P As String
+        Dim S As String
 
-        'If InStr(W(1), ":") = 0 Then
-        'P = FileRoots.SelectedItem & GetFilePath(W(1))
-        'S = FileRoots.SelectedItem & W(1)
-        'Else
-        'P = GetFilePath(W(1))
-        'S = W(1)
-        'End If
-        'If File.Exists(S) = False Then ' het bestand wordt alleen gemaakt als het bestand nog niet bestaat
-        'If Directory.Exists(P) = False Then Directory.CreateDirectory(P)
-        'File.WriteAllText(S, "")
-        'Else
-        'MsgBox(S & " bestaat al")
-        'End If
+        If InStr(W(1), ":") = 0 Then
+            P = FileRoot.SelectedItem & GetFilePath(W(1))
+            S = FileRoot.SelectedItem & W(1)
+        Else
+            P = GetFilePath(W(1))
+            S = W(1)
+        End If
+        If File.Exists(S) = False Then ' het bestand wordt alleen gemaakt als het bestand nog niet bestaat
+            If Directory.Exists(P) = False Then
+                Directory.CreateDirectory(P)
+            End If
+            File.WriteAllText(S, "")
+        Else
+            ' MsgBox(S & " bestaat al")
+        End If
     End Sub
 
     Function GetFileAddress(S As String) As String
@@ -384,16 +383,13 @@ verder:
         ' bepaalt het pad
 
         Dim I As Short
+        Dim L As Int16
 
-        If Left(S, 1) = "@" Then
-            If InStr(S, "\") > 0 Then
-                S = Mid(S, 2, 1) & "\" & Mid(S, 2)
-            Else
-                S = ""
-            End If
-        End If
         If InStr(S, ":") > 0 Then ' staat er een schijf in het pad
-            S = Mid(S, Len(FileRoot.SelectedItem) + 2)
+            L = Len(FileRoot.SelectedItem)
+            If Left(S, L) = FileRoot.SelectedItem Then
+                S = Mid(S, L + 2)
+            End If
         End If
         I = InStrRev(S, "\") ' verwijder de filenaam
         S = Left(S, I)

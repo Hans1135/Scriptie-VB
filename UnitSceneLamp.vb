@@ -24,7 +24,9 @@ Module UnitSceneLamp
             LampFollow = True ' lamp 1 volgt camera
         End Sub
 
-        Sub Pars() ' verandert een lamp
+        Sub Pars()
+
+            ' verandert een lamp
 
             ' W(0) = "lamp"
             ' W(1) = "a" of "d"

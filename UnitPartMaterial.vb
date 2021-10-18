@@ -340,14 +340,16 @@ Verder:
             ReflectiveColor = New SharpDX.Color4(0, 0, 0, 1) ' zwart
             SpecularColor = New SharpDX.Color4(ShininessSlider.Value, ShininessSlider.Value, ShininessSlider.Value, 1) ' wit
             SpecularShininess = (1 - ShininessSlider.Value) * 255 ' 0..10000? hoe hoger hoe minder schittering
-            EnableAutoTangent = True
+            EnableAutoTangent = False
             EnableFlatShading = False
-            EnableTessellation = True
-            RenderEnvironmentMap = True
-            RenderShadowMap = True
-            RenderDiffuseMap = True
+            EnableTessellation = False
+            RenderEnvironmentMap = False
+            RenderShadowMap = False
+            RenderDiffuseMap = False
             DiffuseMap = Nothing
             DisplacementMap = Nothing
+            NormalMap = Nothing
+            SpecularColorMap = Nothing
 
             If InStr(W(1), ".") > 0 Then ' het materiaal is opgegeven als een bestand
                 If GetFileType(W(1)) = ".mtl" Then ' als het materiaal uit een .mtl bestand komt

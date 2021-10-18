@@ -48,14 +48,18 @@ Module UnitMenuFile
 
             ' maakt nieuw onderwerp
 
-            Dim P As String
             Dim S As String
 
-            S = InputBox("New Item")
+            S = InputBox("New Path")
             If S <> "" Then
-                P = GetFilePath(TextFile)
-                Directory.CreateDirectory(FileRoot.SelectedItem & "\" & P & S)
-                TabsFile.Load(FileRoot.SelectedItem & "\" & P & "index.txt")
+                If Left(S, 1) = "\" Then
+                    S = GetFilePath(TextFile) & Mid(S, 2)
+                End If
+                S = FileRoot.SelectedItem & "\" & S
+                Directory.CreateDirectory(S)
+                TabsFile.Load(S & "\info.txt")
+                FilePath.Update(S)
+                FileFile.Update(S)
             End If
         End Sub
     End Class

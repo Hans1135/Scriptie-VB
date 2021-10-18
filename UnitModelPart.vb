@@ -170,11 +170,13 @@ Module UnitModelPart
             AX(FI) = V(7)
             AY(FI) = V(8)
             AZ(FI) = V(9)
+
             For I = FI To 0 Step -1
                 Scale(T, New Vector3D(SX(I), SY(I), SZ(I)))
                 Translate(T, OX(I), OY(I), OZ(I))
                 Rotate(T, New Point3D(OX(I), OY(I), OZ(I)), AX(I), AY(I), AZ(I))
             Next
+
             FI -= 1
             Transform = T
             Add()
@@ -1124,8 +1126,6 @@ volgende:
         Dim E As Single ' eindhoek
     End Structure
 
-    ' van UnitPart
-
     Sub PartLegoInit()
 
         ' start lego onderdeel
@@ -1352,7 +1352,7 @@ volgende:
 
         ' maakt een .bin bestand van een onderdeel
 
-        Dim F As New BinaryWriter(File.Open(FileRoot.SelectedItem & GetFilePath(ParsFile(FI)) & PartFile & ".bin", FileMode.Create))
+        Dim F As New BinaryWriter(File.Open(FileRoot.SelectedItem & "\" & GetFilePath(ParsFile(FI)) & PartFile & ".bin", FileMode.Create))
         Dim I As Long
         Dim J As Long
         Dim K As Long

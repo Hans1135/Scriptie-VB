@@ -50,6 +50,7 @@ Module UnitTextPars
 
         ' stopt het uitvoeren van opdrachten
 
+        PartLegoDone()
         If PartData Then PartDataList()
         DoEvents()
         If PhotoName <> "" Then
@@ -512,7 +513,7 @@ Module UnitTextPars
             Case "parts"
                 ModelPartExport()
             Case "photo"
-                If W(1) = "" Then W(1) = "folder.jpg"
+                If W(1) = "" Then W(1) = "\info.jpg"
                 PhotoName = GetFileAddress(W(1))
             Case "pict"
                 MediaDrawPicture()
@@ -589,7 +590,7 @@ Module UnitTextPars
             Case "times"
                 ModelAnimTimes()
             Case "track"
-                PlayFindTrack() ' zoek liedje
+                PlayFindTrack() ' zoek muziek bestand
             Case "train"
                 TabsCtrl.ParsTrain()
             Case "triangle"
