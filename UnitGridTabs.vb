@@ -81,10 +81,6 @@ Module UnitGridTabs
             Return Me
         End Function
 
-        ''' <summary>
-        ''' 
-        ''' </summary>
-        ''' 
         Public WithEvents PartList As New ListBox
 
         Sub PartList_MouseLeftButtonUp() Handles PartList.MouseLeftButtonUp

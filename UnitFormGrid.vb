@@ -13,7 +13,7 @@ Module UnitFormGrid
             For I = 0 To 4  ' maakt 5 kolommen
                 ColumnDefinitions.Add(New ColumnDefinition)
             Next
-            For I = 0 To 3 ' maakt eerste 4 kolommen 450 breed
+            For I = 0 To 1 ' maakt eerste 2 kolommen 450 breed
                 ColumnDefinitions(I).Width = New GridLength(450)
             Next
             For I = 1 To 3  ' maakt 3 rijen

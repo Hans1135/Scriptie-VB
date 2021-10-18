@@ -42,7 +42,7 @@ Module UnitGridMedia
             Dim H As Integer
             Dim U As UIElement
 
-            If PhotoName = "" Then PhotoName = GetFileAddress("folder.jpg")
+            If PhotoName = "" Then PhotoName = GetFileAddress("\info.jpg")
 
             If GridMedia.Children.Contains(MediaScene) Then
                 U = MediaScene

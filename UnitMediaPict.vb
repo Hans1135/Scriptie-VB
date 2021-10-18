@@ -31,7 +31,7 @@ Module UnitMediaPict
                 MediaDraw.Done()
                 MediaScene.Done()
                 MediaData.Done()
-                MediaScene.Done()
+                MediaPlay.Done()
 
                 Dim B As New BitmapImage
 
